@@ -28,10 +28,9 @@ except ImportError:
     from urllib.request import urlopen, Request
     from urllib.error import HTTPError
 
-
 API_KEY = 'NWVlMGIyMjcwYjU5ZjkxNDFjYjllZjlkOlZrVFY2ZXl0UUVpSklmYjhQbjFVZmcvaHB1ZG9xVmszWTlmVkMxY2R0Q2c9'
 BATCH_PREDICTIONS_URL = 'https://app.datarobot.com/api/v2/batchPredictions/'
-DEPLOYMENT_ID = '5f4c9c81bb594b1085d16908'
+# deployment_id = '5f4c9c81bb594b1085d16908'
 POLL_INTERVAL = 15
 CHUNK = 64 * 1024
 
@@ -63,14 +62,14 @@ def parse_args(custom_args):
     return parser.parse_args(custom_args)
 
 
-def main(custom_args):
+def main(custom_args, deployment_id):
     args = parse_args(custom_args)
 
     input_file = args.input_file
     output_file = args.output_file
 
     payload = {
-        'deploymentId': DEPLOYMENT_ID,
+        'deploymentId': deployment_id,
         'includePredictionStatus': True,
     }
     if args.forecast_point:
@@ -95,7 +94,7 @@ def main(custom_args):
         return 1
 
     try:
-        make_datarobot_batch_predictions(input_file, output_file, payload)
+        make_datarobot_batch_predictions(input_file, output_file, payload, deployment_id)
     except DataRobotPredictionError as err:
         logger.error('Error: %s', err)
         return 1
@@ -103,7 +102,7 @@ def main(custom_args):
     return 0
 
 
-def make_datarobot_batch_predictions(input_file, output_file, payload):
+def make_datarobot_batch_predictions(input_file, output_file, payload, deployment_id):
     # Create new job for batch predictions
     job = _request('POST', BATCH_PREDICTIONS_URL, data=payload)
     links = job['links']
@@ -112,7 +111,7 @@ def make_datarobot_batch_predictions(input_file, output_file, payload):
         'Created Batch Prediction job ID {job_id} for deployment ID {deployment_id}'
         ' ({intake} -> {output}) on {csv_upload_url}.'.format(
             job_id=job['id'],
-            deployment_id=DEPLOYMENT_ID,
+            deployment_id=deployment_id,
             intake=job['jobSpec']['intakeSettings']['type'],
             output=job['jobSpec']['outputSettings']['type'],
             csv_upload_url=links['csvUpload'],
@@ -304,17 +303,28 @@ Usage for historical predictions:
 
 if __name__ == '__main__':
     mql_sql_np=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_data_not_partner_ts_predict.csv','../processed_data/mql_sql/mql_data_not_partner_ts_prediction_output.csv']
-    main(mql_sql_np)
+    deployment_id = '5f4c9c81bb594b1085d16908'
+    main(mql_sql_np, deployment_id)
+    
     mql_sql_p=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_data_partner_ts_predict.csv','../processed_data/mql_sql/mql_data_partner_ts_prediction_output.csv']
-    main(mql_sql_p)
+    deployment_id = '5f4f6b4cbb594b1ab5d17474'
+    main(mql_sql_p, deployment_id)
+    
     sql_sal_np=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_data_not_partner_ts_predict.csv','../processed_data/sql_sal/sal_data_not_partner_ts_prediction_output.csv']
-    main(sql_sal_np)
+    deployment_id = '5f4f6d93684b971aa5ff8ab2'
+    main(sql_sal_np, deployment_id)
+    
     sql_sal_p=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_data_partner_ts_predict.csv','../processed_data/sql_sal/sal_data_partner_ts_prediction_output.csv']
-    main(sql_sal_p)
+    deployment_id = '5f4f6f9d684b971ab5ff6cf9'
+    main(sql_sal_p, deployment_id)
+    
     sal_cw_np=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_data_not_partner_ts_predict.csv','../processed_data/sal_cw/cw_data_not_partner_ts_prediction_output.csv']
-    main(sal_cw_np)
+    deployment_id = '5f4f735f684b971ae5ff5c16'
+    main(sal_cw_np, deployment_id)
+    
     sal_cw_p=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_data_partner_ts_predict.csv','../processed_data/sal_cw/cw_data_partner_ts_prediction_output.csv']
-    main(sal_cw_p)
+    deployment_id = '5f4f7d54afbb171af55e08a1'
+    main(sal_cw_p, deployment_id)
 
 # if __name__ == '__main__':
 #     if sys.argv == None or (len(sys.argv) ==1 and len(sys.argv[0])==0):
