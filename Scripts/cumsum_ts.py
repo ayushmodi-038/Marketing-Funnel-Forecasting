@@ -19,12 +19,16 @@ def get_derived_feature(freq,data_df,date_col):
         data_df['Weeks_Left_to_Year']=((data_df[date_col] + pd.tseries.offsets.YearEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
         data_df['Weeks_Left_to_Quarter']=((data_df[date_col] + pd.tseries.offsets.QuarterEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
         data_df['Weeks_Left_to_Month']=((data_df[date_col] + pd.tseries.offsets.MonthEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
-    
-    else:
+    elif freq.startswith("M") :
         freq_=freq
         data_df['Months_Left_to_Year']=12-data_df[date_col].dt.month
         data_df['Months_Left_to_Quarter']=((data_df[date_col] + pd.tseries.offsets.QuarterEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
-        
+    elif freq.startswith("D"):
+        freq_=freq
+        data_df['Days_Left_to_Year']=((data_df[date_col] + pd.tseries.offsets.YearEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
+        data_df['Days_Left_to_Quarter']=((data_df[date_col] + pd.tseries.offsets.QuarterEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
+        data_df['Days_Left_to_Month']=((data_df[date_col] + pd.tseries.offsets.MonthEnd(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
+        data_df['Days_Left_to_Week']=((data_df[date_col] + pd.tseries.offsets.Week(n=0)) - data_df[date_col]).astype('timedelta64['+freq_+']').astype(int)
     return data_df
 
 def make_future_df(data,date_col,freq,target_col):

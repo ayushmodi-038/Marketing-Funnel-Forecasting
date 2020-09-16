@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['TS.py', 'Time_to_convert.py', 'clean_lead_data.py', 'conversion_rate_estimation.py', 'conversion_analysis.py', 'mql_creation_ts.py']
+recent_files = ['TS.py']
 

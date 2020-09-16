@@ -302,31 +302,31 @@ Usage for historical predictions:
 """
 
 if __name__ == '__main__':
-    mql_sql_np=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_data_not_partner_ts_predict.csv','../processed_data/mql_sql/mql_data_not_partner_ts_prediction_output.csv']
+    mql_sql_np=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_w-sun_data_not_partner_ts_predict.csv','../processed_data/mql_sql/mql_w-sun_data_not_partner_ts_prediction_output.csv']
     deployment_id = '5f4c9c81bb594b1085d16908'
     main(mql_sql_np, deployment_id)
     
-    mql_sql_p=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_data_partner_ts_predict.csv','../processed_data/mql_sql/mql_data_partner_ts_prediction_output.csv']
+    mql_sql_p=['--forecast_point','8/30/2020','../processed_data/mql_sql/mql_w-sun_data_partner_ts_predict.csv','../processed_data/mql_sql/mql_w-sun_data_partner_ts_prediction_output.csv']
     deployment_id = '5f4f6b4cbb594b1ab5d17474'
     main(mql_sql_p, deployment_id)
     
-    sql_sal_np=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_data_not_partner_ts_predict.csv','../processed_data/sql_sal/sal_data_not_partner_ts_prediction_output.csv']
+    sql_sal_np=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_w-sun_data_not_partner_ts_predict.csv','../processed_data/sql_sal/sal_w-sun_data_not_partner_ts_prediction_output.csv']
     deployment_id = '5f4f6d93684b971aa5ff8ab2'
     main(sql_sal_np, deployment_id)
     
-    sql_sal_p=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_data_partner_ts_predict.csv','../processed_data/sql_sal/sal_data_partner_ts_prediction_output.csv']
+    sql_sal_p=['--forecast_point','8/30/2020','../processed_data/sql_sal/sal_w-sun_data_partner_ts_predict.csv','../processed_data/sql_sal/sal_w-sun_data_partner_ts_prediction_output.csv']
     deployment_id = '5f4f6f9d684b971ab5ff6cf9'
     main(sql_sal_p, deployment_id)
     
-    sal_cw_np=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_data_not_partner_ts_predict.csv','../processed_data/sal_cw/cw_data_not_partner_ts_prediction_output.csv']
+    sal_cw_np=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_w-sun_data_not_partner_ts_predict.csv','../processed_data/sal_cw/cw_w-sun_data_not_partner_ts_prediction_output.csv']
     deployment_id = '5f4f735f684b971ae5ff5c16'
     main(sal_cw_np, deployment_id)
     
-    sal_cw_p=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_data_partner_ts_predict.csv','../processed_data/sal_cw/cw_data_partner_ts_prediction_output.csv']
+    sal_cw_p=['--forecast_point','8/30/2020','../processed_data/sal_cw/cw_w-sun_data_partner_ts_predict.csv','../processed_data/sal_cw/cw_w-sun_data_partner_ts_prediction_output.csv']
     deployment_id = '5f4f7d54afbb171af55e08a1'
     main(sal_cw_p, deployment_id)
 
 # if __name__ == '__main__':
 #     if sys.argv == None or (len(sys.argv) ==1 and len(sys.argv[0])==0):
-#         sys.argv=['datarobot-predict.py','--forecast_point','8/30/2020','../processed_data/mql_sql/mql_data_not_partner_ts_predict.csv','../processed_data/mql_sql/mql_data_not_partner_ts_prediction_output.csv']
+#         sys.argv=['datarobot-predict.py','--forecast_point','8/30/2020','../processed_data/mql_sql/mql_w-sun_data_not_partner_ts_predict.csv','../processed_data/mql_sql/mql_w-sun_data_not_partner_ts_prediction_output.csv']
 #     sys.exit(main())
